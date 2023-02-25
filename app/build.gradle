@@ -9,6 +9,7 @@ apply from: rootProject.file('gradle-settings/core.gradle')
 
 dependencies {
     implementation libs.koinCore
+    implementation libs.koinAndroid
     implementation libs.mockk
     implementation libs.junit
     implementation libs.kotlinTest
