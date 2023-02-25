@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
     entities = [Document::class],
     version = 1
 )
-abstract class Database : RoomDatabase() {
+abstract class NoteDatabase : RoomDatabase() {
     abstract fun documentDao(): DocumentDao
 
     companion object {
