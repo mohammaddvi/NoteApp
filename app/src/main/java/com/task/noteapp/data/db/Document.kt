@@ -16,10 +16,10 @@ data class Document(
     val description: String,
 
     @ColumnInfo(name = "image_url")
-    val imageUrl: String,
+    val imageUrl: String?,
 
     @ColumnInfo(name = "isEdited")
-    val isEdited: String,
+    val isEdited: Boolean =false,
 
     @ColumnInfo(name = "creation_date")
     val creationDate: String,

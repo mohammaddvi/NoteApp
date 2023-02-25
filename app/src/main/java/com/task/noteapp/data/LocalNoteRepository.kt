@@ -5,23 +5,9 @@ import com.task.noteapp.Note
 import com.task.noteapp.repository.NoteRepository
 
 class LocalNoteRepository(private val documentDao: DocumentDao) : NoteRepository {
-    override fun addNote(note: Note): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun deleteNote(note: Note): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun deleteNoteById(id: Int): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun editNote(note: Note): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAllNotes(): List<Note> {
-        TODO("Not yet implemented")
-    }
+    override fun deleteNoteById(id: Int): Boolean = documentDao.deleteDocumentById(id)
+    override fun addNote(note: Note): Boolean = documentDao.insertDocument(note.toDocument())
+    override fun editNote(note: Note): Boolean = documentDao.updateDocument(note.toDocument())
+    override fun getAllNotes(): List<Note> = documentDao.getAllDocuments().map { it.toNote() }
+    override fun deleteNote(note: Note): Boolean = documentDao.deleteDocument(note.toDocument())
 }
