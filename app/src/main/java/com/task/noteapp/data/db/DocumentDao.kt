@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.Flow
 interface DocumentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDocument(document: Document)
+    fun insertDocument(document: Document):Boolean
 
     @Query("SELECT * FROM documents")
-    fun getAllDocuments(): Flow<List<Document>>
+    fun getAllDocuments(): List<Document>
 
     @Query("DELETE FROM documents WHERE id =:id")
     fun deleteDocumentById(id: Int): Boolean
