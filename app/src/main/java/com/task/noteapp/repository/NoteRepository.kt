@@ -1,11 +1,12 @@
 package com.task.noteapp.repository
 
 import com.task.noteapp.Note
+import kotlinx.coroutines.flow.Flow
 
 interface NoteRepository {
-    fun addNote(note: Note): Boolean
-    fun deleteNote(note: Note): Boolean
-    fun deleteNoteById(id: Int): Boolean
-    fun editNote(note: Note): Boolean
-    fun getAllNotes(): List<Note>
+    suspend fun addNote(note: Note)
+    suspend fun deleteNote(note: Note): Int
+    suspend fun deleteNoteById(id: Int): Int
+    suspend fun editNote(note: Note): Int
+    fun getNoteList(): Flow<List<Note>>
 }

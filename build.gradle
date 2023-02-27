@@ -8,5 +8,6 @@ buildscript {
         classpath gradlePlugins.kotlinGradle
         classpath "com.android.tools.build:gradle:$versions.gradle"
         classpath gradlePlugins.kotlinAndroidExtensions
+        classpath libs.sageArgs
     }
 }

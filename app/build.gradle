@@ -1,14 +1,17 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id("androidx.navigation.safeargs")
 }
 apply from: rootProject.file('gradle-settings/dependencies.gradle')
 apply from: rootProject.file('gradle-settings/core.gradle')
 
 dependencies {
     implementation libs.koinCore
+    implementation libs.lifeCycleViewModel
+    implementation libs.material
     implementation libs.koinAndroid
     implementation libs.mockk
     implementation libs.junit
@@ -17,7 +20,8 @@ dependencies {
     implementation libs.roomCommon
     implementation libs.roomRuntime
     implementation libs.roomKtx
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation libs.navigationKtx
+    implementation libs.navigationFragment
     kapt libs.roomCompiler
     testImplementation libs.coroutinesTest
 }

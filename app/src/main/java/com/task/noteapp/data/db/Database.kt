@@ -9,8 +9,4 @@ import androidx.room.RoomDatabase
 )
 abstract class NoteDatabase : RoomDatabase() {
     abstract fun documentDao(): DocumentDao
-
-    companion object {
-        private val INSTANCE: Database? = null
-    }
 }
