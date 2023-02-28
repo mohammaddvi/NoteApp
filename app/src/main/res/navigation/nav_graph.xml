@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/noteListFragment"
+    android:id="@+id/nav_graph">
+    <fragment
+        android:id="@+id/noteListFragment"
+        android:name="com.task.noteapp.presentation.NoteListFragment"
+        android:label="ListNote"
+        tools:layout="@layout/fragment_note_list">
+
+        <action
+            android:id="@+id/action_list_to_add_note"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.task.noteapp.presentation.NoteFragment"
+        android:label="ChangeNote"
+        tools:layout="@layout/fragment_note">
+
+        <argument
+            android:name="edit_note"
+            android:defaultValue="@null"
+            app:argType="com.task.noteapp.Note"
+            app:nullable="true" />
+    </fragment>
+</navigation>

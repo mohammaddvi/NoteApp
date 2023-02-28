@@ -1,0 +1,24 @@
+
+apply from: rootProject.file('gradle-settings/dependencies.gradle')
+android {
+    compileSdk versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
+        consumerProguardFiles "consumer-rules.pro"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+    maven {
+        url 'https://maven.google.com'
+    }
+}
