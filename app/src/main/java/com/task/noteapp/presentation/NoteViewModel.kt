@@ -1,6 +1,5 @@
 package com.task.noteapp.presentation
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,15 +10,14 @@ import com.task.noteapp.usecase.EditNoteUseCase
 import com.task.noteapp.usecase.GetAllNotesUseCase
 import androidx.lifecycle.viewModelScope
 import com.task.noteapp.utils.SingleLiveData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 class NoteViewModel(
     private val addNoteUseCase: AddNoteUseCase,
     private val getAllNotesUseCase: GetAllNotesUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
-    private val editNoteUseCase: EditNoteUseCase
+    private val editNoteUseCase: EditNoteUseCase,
 ) : ViewModel() {
 
     private val _notes = MutableLiveData<List<Note>>(emptyList())
@@ -28,9 +26,7 @@ class NoteViewModel(
     private val _successfulOperation = SingleLiveData<Boolean>()
     val successfulOperation: LiveData<Boolean> = _successfulOperation
 
-    var currentUpdatingNote: Note? = null
-        private set
-
+    private var userIsEditing = false
 
     init {
         getAllNotes()
@@ -38,10 +34,8 @@ class NoteViewModel(
 
     private fun saveNote(note: Note) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                val result = addNoteUseCase.execute(note)
-                _successfulOperation.postValue(result)
-            }
+            val result = addNoteUseCase.execute(note)
+            _successfulOperation.postValue(result)
         }
     }
 
@@ -53,42 +47,33 @@ class NoteViewModel(
         }
     }
 
-    private fun editNote(note: Note) {
+    private fun editNote(oldNote: Note, newNote: Note) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                editNoteUseCase.execute(note).also {
-                    if (it) currentUpdatingNote = null
-                    _successfulOperation.postValue(it)
-                }
+            editNoteUseCase.execute(
+                oldNote.copy(
+                    title = newNote.title,
+                    description = newNote.description,
+                    imageURl = newNote.imageURl ?: oldNote.imageURl,
+                    isEdited = true
+                )
+            ).also {
+                if (it) userIsEditing = false
+                _successfulOperation.postValue(it)
             }
         }
     }
 
     private fun deleteNote(note: Note) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                deleteNoteUseCase.execute(note)
-            }
+            val status = deleteNoteUseCase.execute(note)
+            _successfulOperation.postValue(status)
         }
     }
 
     fun saveButtonClicked(newNote: Note) {
-        if (currentUpdatingNote == null) saveNote(newNote)
-        else {
-            editNote(
-                currentUpdatingNote!!.copy(
-                    title = newNote.title,
-                    description = newNote.description,
-                    imageURl = newNote.imageURl ?: currentUpdatingNote!!.imageURl,
-                    isEdited = true
-                )
-            )
-        }
+        saveNote(newNote)
     }
 
     fun deleteButtonClicked(note: Note) = deleteNote(note)
-    fun editButtonClicked(note: Note) {
-        currentUpdatingNote = note
-    }
-
+    fun editButtonClicked(oldNote: Note, newNote: Note) = editNote(oldNote, newNote)
 }

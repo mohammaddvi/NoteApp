@@ -6,6 +6,7 @@ import com.task.noteapp.data.db.Document
 import com.task.noteapp.utils.epochToDateFormat
 
 fun Note.toDocument(): Document = Document(
+    id = id,
     title = title,
     description = description,
     imageUrl = imageURl.toString(),
@@ -13,4 +14,11 @@ fun Note.toDocument(): Document = Document(
 )
 
 fun Document.toNote(): Note =
-    Note(title, description, epochToDateFormat(creationDate), isEdited, imageUrl?.let { Uri.parse(imageUrl) })
+    Note(
+        id,
+        title,
+        description,
+        epochToDateFormat(creationDate),
+        isEdited,
+        imageUrl?.let { Uri.parse(it) }
+    )

@@ -3,55 +3,109 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:background="@drawable/curved_rectangle"
-    android:padding="8dp">
+    android:layout_margin="8dp"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/gray_curved_rectangle"
+    android:elevation="4dp"
+    android:paddingBottom="8dp">
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/image_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/gray_curved_rectangle"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title"
-        style="@style/Theme.NoteApp.Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="this is a title test" />
+        app:layout_constraintVertical_bias="0"
+        tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/description"
-        style="@style/Theme.NoteApp.Description"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/note_linear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="start"
-        android:maxLines="2"
+        android:orientation="vertical"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="this is a description test" />
+        app:layout_constraintTop_toBottomOf="@id/image_item">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title_item"
+            style="@style/Theme.NoteApp.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:maxLines="1"
+            tools:text="this is a title test" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/description_item"
+            style="@style/Theme.NoteApp.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
+            android:maxLines="2"
+            tools:text="this is a description test" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/creation_date_item"
+            style="@style/Theme.NoteApp.Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="22/06/1993" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/remove_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/orange_curved_rectangle"
+        android:padding="3dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/delete_icon"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/edit_button"
+        app:layout_constraintTop_toBottomOf="@id/note_linear"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/edit_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/orange_curved_rectangle"
+        android:padding="3dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/edit_icon"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/note_linear"
+        tools:visibility="visible" />
 
     <TextView
-        android:id="@+id/creation_date"
-        style="@style/Theme.NoteApp.Date"
+        android:id="@+id/edited_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="8dp"
+        android:text="Edited"
+        android:textColor="@color/gray_200"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/note_linear"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        tools:text="22/06/1993" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
