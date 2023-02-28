@@ -6,9 +6,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Note(
+    val id: Int? = null,
     val title: String,
     val description: String,
-    val date: String?=null,
+    val date: String? = null,
     val isEdited: Boolean = false,
     val imageURl: Uri? = null
-):Parcelable
+) : Parcelable

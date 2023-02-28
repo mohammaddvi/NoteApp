@@ -4,63 +4,97 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_height="match_parent"
+    android:background="@color/black"
     android:padding="8dp">
 
     <ImageView
-        android:id="@+id/note_photo"
+        android:id="@+id/image_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/gray_curved_rectangle"
+        android:scaleType="centerInside"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        tools:visibility="visible" />
 
     <LinearLayout
-        android:id="@+id/change_note_linear"
+        android:id="@+id/note_spec"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/curved_rectangle"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/image_item">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/change_title"
-            style="@style/Theme.NoteApp.Title"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:maxLines="1"
-            tools:text="this is a title test" />
+            android:layout_marginBottom="10dp"
+            app:hintEnabled="false">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/change_description"
-            style="@style/Theme.NoteApp.Description"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_title_item"
+                style="@style/Theme.NoteApp.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                android:gravity="start"
+                android:hint="@string/title_hint"
+                android:textColorHint="@color/yellow"
+                android:inputType="text"
+                tools:text="this is a title test" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="start"
-            tools:text="this is a description test" />
+            android:layout_marginBottom="10dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_description_item"
+                style="@style/Theme.NoteApp.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/black"
+                android:gravity="start"
+                android:hint="@string/description_hint"
+                android:inputType="textMultiLine"
+                android:textColorHint="@color/yellow"
+                tools:text="this is a title test" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/save_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        app:layout_constraintTop_toBottomOf="@id/change_note_linear" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/orange_curved_rectangle"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/checked_last"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/note_spec"
+        app:layout_constraintVertical_bias="1" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/add_photo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add photo"
-        app:layout_constraintTop_toBottomOf="@id/save_button" />
-
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/orange_curved_rectangle"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/add_photo_icon"
+        app:layout_constraintBottom_toBottomOf="@id/save_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/save_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

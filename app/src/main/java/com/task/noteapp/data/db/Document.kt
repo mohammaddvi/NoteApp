@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull
 
 @Entity(tableName = "documents")
 data class Document(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    @PrimaryKey(autoGenerate = true) val id: Int? = 0,
 
     @ColumnInfo(name = "title") val title: String,
 
