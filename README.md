@@ -1,5 +1,5 @@
 # NoteApp
-This is Getir Task for Senior Android Position.
+This is a sample note application.
 
-##Technologies
+## Technologies
 Kotlin, Coroutine, Room, Unit Testing
